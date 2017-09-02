@@ -48,7 +48,7 @@
     </update>
 
  <!--根据id 查询信息-->
-    <select id="getId">
+    <select id="getId" resultType="Cost">
         SELECT * FROM  cost where cost_id = #{id}
     </select>
     <select id="findInfo" resultType="com.yg.bean.Admin" >

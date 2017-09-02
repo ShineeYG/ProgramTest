@@ -18,7 +18,7 @@ public interface CostService {
 
     void addCost(Cost cost);
 
-    void getId(Integer id);
+    Cost getId(Integer id);
 
     boolean findInfo(@Param("user") String user, @Param("password") Integer password);
 

@@ -50,6 +50,15 @@ public class CostController {
         return "/fee/fee_modi";
     }
 
+    //跳转到查看信息的界面
+    @RequestMapping("feedetail")
+
+    public String jumpfeedetail() {
+
+        System.out.println("走你 ");
+        return "/fee/fee_detail";
+    }
+
 
     //资费管理
     @RequestMapping("getAllCost")
@@ -66,7 +75,7 @@ public class CostController {
     public String delectCost(@RequestParam("bid") Integer id) {
 
         System.out.println("走到这了   ...");
-        System.out.println( "获取到的 id     : "+  id );
+        System.out.println("获取到的 id     : " + id);
         costService.delectCost(id);
         return "fee/fee_list";
     }
@@ -84,12 +93,14 @@ public class CostController {
     }
 
 
-//    //根据id查询
-//    @RequestMapping("getID")
-//    public String getId(@RequestParam("id") Integer id) {
-//        costService.getId(id);
-//        return "fee/fee_list";
-//    }
+    //根据id查询
+    @RequestMapping("getID")
+    @ResponseBody
+    public Cost getId(@RequestParam("id") Integer id) {
+        Cost cost = costService.getId(id);
+        System.out.println( "            "+ cost);
+        return cost;
+    }
 
 
     //登录界面
@@ -99,16 +110,21 @@ public class CostController {
                         @RequestParam("code") Integer code) {
         System.out.println(user + "" + password + "" + code);
 
-        if (code == 8251) {
-            if (costService.findInfo(user, password)) {
-                return "index";
+        //如果登录账号 密码 验证码  都为空  就重新登录
+        if (user == null | password == null | code == null) {
+            return "login";
+        } else {
+            //如果验证码不是8251  就不允许登录
+            if (code == 8251) {
+                if (costService.findInfo(user, password)) {
+                    return "index";
+                } else {
+                    return "login";
+                }
             } else {
                 return "login";
             }
-        } else {
-            return "login";
         }
-
     }
 
 

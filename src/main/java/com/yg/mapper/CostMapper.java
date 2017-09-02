@@ -28,7 +28,7 @@ public interface CostMapper {
     //修改Cost
     void updateCost(int id);
 
-    void getId(Integer id);
+    Cost getId(Integer id);
 
     Admin findInfo(String user);
 }

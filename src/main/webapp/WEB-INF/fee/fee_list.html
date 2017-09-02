@@ -38,15 +38,16 @@
                     $("#tbody" + aid).remove()
                 }
             })
-
             document.getElementById("operate_result_info").style.display = "block";
         }
+
+
 
 
         function addFee(id, name, baseDuration, baseCost, unitCost, creatime, startime, status) {
             var td1 = $("<td></td>").html("<p>" + id + "</p>");
             var td2 = $("<td></td>");
-            $("<a href='/feedetail'>" + name + "</a>").appendTo(td2);
+            $("<a href='#' >" + name + "</a>").appendTo(td2).attr("nameid" , id ).click(check);
             var td3 = $("<td></td>").html("<p>" + baseDuration + "</p>");
             var td4 = $("<td></td>").html("<p>" + baseCost + "</p>");
             var td5 = $("<td></td>").html("<p>" + unitCost + "</p>");
@@ -64,6 +65,20 @@
         function newfunc() {
             var num = $(this).attr("nameid");
             getAllCost(num, 3)
+        }
+        var check = function () {
+            var id  = $(this).attr("nameid")
+            $.ajax({
+                url: "getID",
+                type: "get",
+                data: {
+                    id:id
+                },
+                success:function (result) {
+                    window.location.href="/feedetail?cost="+result
+                }
+
+            })
         }
 
         function showpage(result) {

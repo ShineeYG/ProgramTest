@@ -40,8 +40,9 @@ public class CostServiceImpl implements CostService {
         costMapper.addCost(cost);
     }
 
-    public void getId(Integer id) {
-        costMapper.getId(id);
+    public Cost getId(Integer id) {
+        Cost cost = costMapper.getId(id);
+        return cost;
     }
 
     public boolean findInfo(@Param("user") String user, @Param("password") Integer password) {
