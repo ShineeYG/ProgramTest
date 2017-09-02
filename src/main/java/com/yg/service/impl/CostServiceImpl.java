@@ -32,7 +32,7 @@ public class CostServiceImpl implements CostService {
         return pageInfo;
     }
 
-    public void delectCost(String id) {
+    public void delectCost(Integer id) {
         costMapper.deleteCost(id);
     }
 

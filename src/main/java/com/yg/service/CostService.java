@@ -14,7 +14,7 @@ import java.util.List;
 public interface CostService {
     PageInfo<Cost> searchAllCost(Integer pageNum , Integer pageSize);
 
-    void delectCost(@Param("id") String id);
+    void delectCost(@Param("id") Integer id);
 
     void addCost(Cost cost);
 

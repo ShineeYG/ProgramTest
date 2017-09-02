@@ -44,21 +44,29 @@ public class CostController {
         return "/fee/fee_add";
     }
 
+    //跳转到修改Cost界面
+    @RequestMapping("feemodi")
+    public String jumpFeeModi() {
+        return "/fee/fee_modi";
+    }
+
 
     //资费管理
     @RequestMapping("getAllCost")
     @ResponseBody
     public PageInfo<Cost> searchAllCost(@RequestParam("pageNum") Integer pageNum,
                                         @RequestParam("pageSize") Integer pageSize) {
-        System.out.println(pageNum + "  输出获取到的结果  " + pageSize);
         PageInfo<Cost> costList = costService.searchAllCost(pageNum, pageSize);
         System.out.println("查询的结果  : " + costList);
         return costList;
     }
 
     //删除Cost信息
-    @RequestMapping("delectCost")
-    public String delectCost(@RequestParam("id") String id) {
+    @RequestMapping("/delectCost")
+    public String delectCost(@RequestParam("bid") Integer id) {
+
+        System.out.println("走到这了   ...");
+        System.out.println( "获取到的 id     : "+  id );
         costService.delectCost(id);
         return "fee/fee_list";
     }
@@ -68,7 +76,6 @@ public class CostController {
     @RequestMapping("addCost")
     public String addCost(Cost cost) {
 
-        System.out.println( "获取到的 Cost  "+  cost.getName());
 //        默认创建时 状态为1   时间为系统时间
         cost.setStatus("1");
         cost.setCreatetime(new Timestamp(System.currentTimeMillis()));
@@ -77,12 +84,12 @@ public class CostController {
     }
 
 
-    //根据id查询
-    @RequestMapping("getID")
-    public String getId(@RequestParam("id") Integer id) {
-        costService.getId(id);
-        return "fee/fee_list";
-    }
+//    //根据id查询
+//    @RequestMapping("getID")
+//    public String getId(@RequestParam("id") Integer id) {
+//        costService.getId(id);
+//        return "fee/fee_list";
+//    }
 
 
     //登录界面

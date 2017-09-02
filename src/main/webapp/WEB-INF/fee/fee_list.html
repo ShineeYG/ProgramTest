@@ -26,9 +26,22 @@
         }
         //删除
         function deleteFee() {
-            var r = window.confirm("确定要删除此资费吗？");
+//            var r = window.confirm("确定要删除此资费吗？");
+            var aid = $(this).attr("nameid");
+            $.ajax({
+
+                url:"/delectCost",
+                data: {
+                    bid: aid
+                },
+                success: function (result) {
+                    $("#tbody" + aid).remove()
+                }
+            })
+
             document.getElementById("operate_result_info").style.display = "block";
         }
+
 
         function addFee(id, name, baseDuration, baseCost, unitCost, creatime, startime, status) {
             var td1 = $("<td></td>").html("<p>" + id + "</p>");
@@ -42,7 +55,7 @@
             var td8 = $("<td></td>").html("<p>" + status + "</p>");
             var td9 = $("<td></td>");
             $("<input type='button' value='启用' class='btn_start' onclick='startFee();'/>").appendTo(td9);
-            $("<input type='button' value='修改' class='btn_modify' onclick='location.href='/feemodi';'/>").appendTo(td9);
+            $("<input type='button' value='修改' class='btn_modify' onclick='location.href='feemodi';'/>").appendTo(td9);
             $("<input type='button' value='删除' class='btn_delete' onclick='deleteFee();'/>").appendTo(td9);
             var tr = $("<tr></tr>").append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7).append(td8).append(td9);
             $("#tbody").append(tr);
@@ -145,10 +158,10 @@
             <input type="button" value="增加" class="btn_add" onclick="location.href='addFee';"/>
         </div>
         <!--启用操作的操作提示-->
-        <div id="operate_result_info" class="operate_success">
-            <img src="../images/close.png" onclick="this.parentNode.style.display='none';"/>
-            删除成功！
-        </div>
+        <!--<div id="operate_result_info" class="operate_success">-->
+            <!--<img src="../images/close.png" onclick="this.parentNode.style.display='none';"/>-->
+            <!--删除成功！-->
+        <!--</div>-->
         <!--数据区域：用表格展示数据-->
         <div id="data">
             <table id="datalist">

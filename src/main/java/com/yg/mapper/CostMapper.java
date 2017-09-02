@@ -22,7 +22,7 @@ public interface CostMapper {
 
 
     //删除Cost
-    void deleteCost(String id);
+    void deleteCost(Integer id);
 
 
     //修改Cost
