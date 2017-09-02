@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+    <mapper namespace="com.yg.mapper.CostMapper">
+
+
+    <resultMap id="CostMap" type="com.yg.bean.Cost">
+        <id column="cost_id" property="cost_id"/>
+        <result column="name" property="name"/>
+        <result property="base_duration" column="base_duration"/>
+        <result column="base_cost" property="base_cost"/>
+        <result column="unit_cost" property="unit_cost"/>
+        <result column="status" property="status"/>
+        <result column="descr" property="descr"/>
+        <result column="createtime" property="createtime"/>
+        <result column="startime" property="startime"/>
+        <result column="cost_type" property="cost_type"/>
+    </resultMap>
+
+    <!--查询所有Cost 信息-->
+    <select id="searchAllCost" resultType="com.yg.bean.Cost">
+      SELECT * FROM cost
+    </select>
+
+
+
+    <!--增加所有Cost信息-->
+    <insert id="addCost" >
+        INSERT into cost VALUES ( null , #{name} , #{base_duration}, #{base_cost}, #{unit_cost},
+        #{status}, #{descr}, #{createtime},#{startime},#{cost_type})
+    </insert>
+
+
+
+    <!--删除-->
+    <delete id="deleteCost" parameterType="Cost">
+        DELETE  FROM  cost WHERE cost_id = #{id}
+    </delete>
+
+
+    <!--更新Cost信息-->
+    <update id="updateCost">
+        UPDATE cost SET name = #{name} ,base_duration=#{base_duration},base_cost=#{base_cost},
+        unit_cost=#{unit_cost},descr=#{descr} ,cost_type=#{cost_type} where cost_id = #{id}
+    </update>
+
+ <!--根据id 查询信息-->
+    <select id="getId">
+        SELECT * FROM  cost where cost_id = #{id}
+    </select>
+    <select id="findInfo" resultType="com.yg.bean.Admin" >
+            SELECT  * FROM  admin_info WHERE admin_code = #{user} ;
+    </select>
+
+
+
+
+</mapper>
